@@ -20,11 +20,38 @@ class ComputerSystem:
     def systemsCheck(self):
         print("Run a systems check")
 
-    def storeQueue(self):
-        print("Queue for remaining pods to transport")
+    def AddToQueue(self):
+        print("Pod added to queue for pickup")
 
     def communicate(self):
         print("communicate any errors with owner/manufacturer")
+        
+    def ResetQueue(self):
+        print("reset remaining Queue")
+        
+    def ClearPod(self):
+        print("remove Pod from Queue")
+        
+    def AddDirections(self):
+        print("Add directions to pod or final destination")
+
+"""
+Operator controls Robot functions and informs it which pods to pick up
+"""
+
+class Operator:
+    def __init__(self) -> None:
+        self 
+
+    def addPod(self):
+        print("Operator has assigned a pod for the SmartRobot to locate")
+
+    def RunCheck(self):
+        print("tell Computer System to run a systems check")
+
+    def OverrideRoute(self):
+        print("make a new route for robot")
+
 
 """
 Corkscrew to transport pods
@@ -66,6 +93,20 @@ class PowerSystem:
     def turnOff(self):
         print("turn off the robot")
 
+
+class Timer:
+    def __init__(self) -> None:
+        self.Minutes = 5
+
+    def SetMinutes(self, min):
+        self.Minutes = min
+
+    def start(self):
+        print("start timer")
+
+    def stop(self):
+        print("stop timer")
+
 """
 Wi-Fi signals the Computer system
 """
@@ -95,7 +136,7 @@ class DrivingSystem:
         self._speed = 3
 
     def start(self):
-        print("start the motor")
+        print("motor starts to enable driving mode")
 
     def stop(self):
         print("stop the motor")
@@ -104,10 +145,31 @@ class DrivingSystem:
         self._speed = miles
         print("set maximum speed of robot")
 
+    def Direct(self):
+        print("Driving System controls the wheels and tells them where to go")
+
+    def Arrived(self):
+        print("arrived at destination")
+
+
 """
 The Driving System operates the Middle wheels and the side wheels
 """
-class MiddleWheel:
+class Wheels:
+    def __init__(self, size, position) -> None:
+        self._size = size
+        self._position = position
+
+    def go(self):
+        print("wheels move")
+
+    def stop(self):
+        print("wheels stop")
+
+    def follow(self):
+        print("wheels follow directions")
+
+class Middle(Wheels):
     def __init__(self, size, position) -> None:
         self._size = size
         self._position = position
@@ -116,7 +178,7 @@ class MiddleWheel:
         print("middle wheel spins to change directions")
         self._degrees = degrees
 
-class SideWheels:
+class Side(Wheels):
     def __init__(self, size, position) -> None:
         self._size = size
         self._position = position
@@ -133,7 +195,10 @@ The Cameras alert the driving system
 class Cameras:
     def __init__(self, DirectionFacing) -> None:
         self._DirectionFacing = DirectionFacing
-        print("the camera could be pointing up or down")
+        print(f"the camera will read barcodes on pods or floor {DirectionFacing}")
+
+    def on(self):
+        print("turn Cameras on")
 
     def readBarcode(self):
         print("read the barcodes on the floor and on the pods")
@@ -172,6 +237,21 @@ class Bumper:
     def stop(self):
         print("alert computer to stop robot")
 
-    def collionDetection(self):
+    def collisionDetection(self):
         print("touch sensors to detect collision")
 
+o = Operator()
+o.addPod()
+C= ComputerSystem(Software=any)
+C.AddToQueue()
+d = DrivingSystem(motorType='8')
+d.start()
+C.AddDirections()
+cam = Cameras('up')
+cam.on()
+d.Direct()
+S = Side('small', 'all 4')
+M = Middle('medium', 'middle')
+S.go()
+M.go()
+d.Arrived()
