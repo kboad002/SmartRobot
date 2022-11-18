@@ -256,3 +256,5 @@ M = Middle('medium', 'middle')
 S.go()
 M.go()
 d.Arrived()
+C.ClearPod()
+
